@@ -1,0 +1,28 @@
+#
+# default clojure .gitignores
+pom.xml
+pom.xml.asc
+*.jar
+*.class
+/lib/
+/classes/
+/target/
+/checkouts/
+.DS_Store
+.nrepl-port
+.cpcache/
+
+#
+# clojure tools .gitignores
+.carve/
+
+#
+# Engineer-specific ignores.
+/data/*.parquet
+/data/live/*.nippy
+/data/training/*.nippy
+/merger_results/*.nippy
+/secret/*.secret
+data/live-ids.edn
+data/v42correlations.nippy
+engineer.sublime-workspace

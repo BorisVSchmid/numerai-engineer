@@ -1,0 +1,106 @@
+{:description "The Engineer. Its precursors were considerably more complex, consisting of multiple DNA strings, and with a 
+               neural network bolted on top. But this bare-bone engineer seems to be doing fine as well, and has a decent 
+               speed in evolving a solution."
+
+ :paths ["src"]
+
+ :mvn/local-repo "C:/.m2" ;; uncomment if you don't want .m2 to be locate in the root of C:/. Putting .m2 there helps avoid otherwise overly long classpaths in Java.
+
+ :deps {org.clojure/clojure {:mvn/version "1.11.1"}
+        ;
+        ;; neanderthal
+        uncomplicate/neanderthal {:mvn/version "0.46.0"}
+        org.bytedeco/mkl-platform-redist {:mvn/version "2022.2-1.5.8"}
+        ;
+        ;; reading nippy files with neanderthal matrices
+        com.taoensso/nippy {:mvn/version "3.2.0"}
+        neanderthal-stick/neanderthal-stick {:mvn/version "0.4.0"}
+        ;
+        ;; multithreading
+        org.clj-commons/claypoole {:mvn/version "1.2.2"}
+        ;
+        ;; time and http
+        clj-http/clj-http {:mvn/version "3.9.1"}   ;; old versions, but they are also in use by other libraries
+        org.clojure/data.json {:mvn/version "0.2.6"}  ;; old versions, but they are also in use by other libraries
+        tick/tick {:mvn/version "0.5.0"}
+        ;
+        ;; visualization
+        metasoarous/oz {:mvn/version "2.0.0-alpha5"}}
+
+ :aliases {;; Run carve (check for unused bits) with clojure -M:carve --paths src. 
+           ;; But be sure to uncomment several functions in core.clj before you run it, else you remove too much.
+           ;; Also don't remove the nippy-ext with-real-factory. It is needed.
+           ;
+           ;; Also, see the Stree by running clj -Stree
+           ;;
+           :carve {:extra-deps {io.github.borkdude/carve {:git/url "https://github.com/borkdude/carve"
+                                                          :git/sha "cb621317ae1582869c8bd8f1a47cf57a3598d803"}}
+                   :main-opts  ["-m" "carve.main"]}
+           ;
+           :repl {:extra-deps {nrepl/nrepl {:mvn/version "1.0.0"}
+                               com.techascent/tmd-parquet {:mvn/version "1.000-beta-40"}
+                               org.clojure/data.csv {:mvn/version "1.0.1"}}
+                  :main-opts ["-m"  "nrepl.cmdline" "-i" "-b" "0"]
+                  :jvm-opts ["-Dclojure.compiler.direct-linking=true"
+                             "-XX:+UseG1GC"
+                             "-XX:SoftRefLRUPolicyMSPerMB=1"
+                             "-XX:MaxDirectMemorySize=32g"
+                             "--add-opens=java.base/jdk.internal.ref=ALL-UNNAMED"
+                             "--add-opens=java.base/sun.nio.ch=ALL-UNNAMED"]}
+           ;
+           ;
+           :fetch {:extra-deps {techascent/tech.ml.dataset {:mvn/version "6.019"}
+                               com.techascent/tmd-parquet {:mvn/version "1.000-beta-40"}}
+                  :main-opts ["-m"  "engineer.core-fetch"]
+                  :jvm-opts ["-Dclojure.compiler.direct-linking=true"
+                             "-XX:+UseG1GC"
+                             "-XX:SoftRefLRUPolicyMSPerMB=1"
+                             "-XX:MaxDirectMemorySize=32g"
+                             "--add-opens=java.base/jdk.internal.ref=ALL-UNNAMED"
+                             "--add-opens=java.base/sun.nio.ch=ALL-UNNAMED"]}
+           ;
+           ;
+           :train {:main-opts ["-m"  "engineer.core-train"]
+                   :jvm-opts ["-Dclojure.compiler.direct-linking=true"
+                             "-XX:+UseG1GC"
+                             "-XX:SoftRefLRUPolicyMSPerMB=1"
+                             "-XX:MaxDirectMemorySize=16g"
+                             "--add-opens=java.base/jdk.internal.ref=ALL-UNNAMED"
+                             "--add-opens=java.base/sun.nio.ch=ALL-UNNAMED"]}
+           ;
+           ;
+           :merge {:main-opts ["-m"  "engineer.core-merge"]
+                   :jvm-opts ["-Dclojure.compiler.direct-linking=true"
+                             "-XX:+UseG1GC"
+                             "-XX:SoftRefLRUPolicyMSPerMB=1"
+                             "-XX:MaxDirectMemorySize=16g"
+                             "--add-opens=java.base/jdk.internal.ref=ALL-UNNAMED"
+                             "--add-opens=java.base/sun.nio.ch=ALL-UNNAMED"]}
+           ;
+           ;
+           :predict {:extra-deps {techascent/tech.ml.dataset {:mvn/version "6.019"}
+                                  com.techascent/tmd-parquet {:mvn/version "1.000-beta-40"}
+                                  org.clojure/data.csv {:mvn/version "1.0.1"}}
+                  :main-opts ["-m"  "engineer.core-predict"]
+                  :jvm-opts ["-Dclojure.compiler.direct-linking=true"
+                             "-XX:MaxDirectMemorySize=2g"
+                             "--add-opens=java.base/jdk.internal.ref=ALL-UNNAMED"
+                             "--add-opens=java.base/sun.nio.ch=ALL-UNNAMED"]}
+           ;
+           ;
+           :submit {:main-opts ["-m"  "engineer.core-submit"]
+                   :jvm-opts ["-Dclojure.compiler.direct-linking=true"
+                             "--add-opens=java.base/jdk.internal.ref=ALL-UNNAMED"
+                             "--add-opens=java.base/sun.nio.ch=ALL-UNNAMED"]}
+           
+           :polly {:extra-deps {techascent/tech.ml.dataset {:mvn/version "6.019"}
+                                com.techascent/tmd-parquet {:mvn/version "1.000-beta-40"}
+                                org.clojure/data.csv {:mvn/version "1.0.1"}}
+                   :main-opts ["-m"  "engineer.polly"]
+                   :jvm-opts ["-Dclojure.compiler.direct-linking=true"
+                              "-XX:MaxDirectMemorySize=2g"
+                              "--add-opens=java.base/jdk.internal.ref=ALL-UNNAMED"
+                              "--add-opens=java.base/sun.nio.ch=ALL-UNNAMED"]}
+}}
+ 
+           
