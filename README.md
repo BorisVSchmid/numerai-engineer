@@ -34,11 +34,11 @@ The fuzzy hillclimbing algorithm iteratively searches for mutations that improve
 
 * Download the release and unpack it in a directory of your choice
 
-* Move the v42correlations.nippy file in the /data directory.
+* Move the v42correlations.nippy file in the /data directory
 
-* Train the model (clj -M:train)
+* (you can skip this step, as the training results are included) Train the model (clj -M:train)
 
-* Merge the model predictions (clj -M:merge)
+* (you can skip this step, as the merge results are included) Merge the model predictions (clj -M:merge)
 
 * Fetch the live data and build the predictions (clj -M:predict)
 

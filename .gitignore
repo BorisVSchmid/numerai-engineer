@@ -21,7 +21,6 @@ pom.xml.asc
 /data/*.parquet
 /data/live/*.nippy
 /data/training/*.nippy
-/merger_results/*.nippy
 /secret/*.secret
 data/live-ids.edn
 data/v42correlations.nippy
