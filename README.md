@@ -1,6 +1,6 @@
 # Engineer
 
-Engineer is a Genetic Programming Algorithm written in Clojure that generates solutions for the [https://numer.ai](Numer.ai machine learning competition). 
+Engineer is a Genetic Programming Algorithm written in Clojure that generates solutions for the [Numer.ai](https://numer.ai) data science competition. 
 
 ## Overview 
 
