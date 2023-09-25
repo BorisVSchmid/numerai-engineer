@@ -1,2 +1,2 @@
-cd C:/Users/boris/BVS/github/PUBLIC/engineer_PUBLIC
+cd C:/path-to-your-engineer-directory
 powershell -command clj -M:polly
